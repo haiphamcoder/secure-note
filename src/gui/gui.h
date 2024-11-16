@@ -12,5 +12,6 @@ void on_menu_edit_cut(GtkWidget *widget, gpointer data);
 void on_menu_edit_copy(GtkWidget *widget, gpointer data);
 void on_menu_edit_paste(GtkWidget *widget, gpointer data);
 void on_menu_help_about(GtkWidget *widget, gpointer data);
+void update_line_numbers(GtkTextBuffer *buffer, gpointer data);
 
 #endif
