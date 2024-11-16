@@ -1,14 +1,19 @@
 CC = gcc
-CFLAGS = -Wall -g `pkg-config --cflags gtk+-3.0`
+CFLAGS = -Wall -g `pkg-config --cflags gtk+-3.0` -I./src/gui -I./src/crypto
 LDFLAGS = `pkg-config --libs gtk+-3.0` -lcrypto
 
-SRC = src/main.c src/gui.c src/crypto.c
+SRC_MAIN = src/main/main.c
+SRC_GUI = src/gui/gui.c
+SRC_CRYPTO = src/crypto/crypto.c
+SRC_UTILS = $(wildcard src/utils/*.c)
+SRC = $(SRC_MAIN) $(SRC_GUI) $(SRC_CRYPTO) $(SRC_UTILS)
+
 OBJ = $(SRC:src/%.c=build/%.o)
 EXEC = bin/secure-note
 
 .PHONY: all clean
 
-all: $(EXEC)
+all: directories $(EXEC)
 
 $(EXEC): $(OBJ)
 	@mkdir -p bin
@@ -16,9 +21,12 @@ $(EXEC): $(OBJ)
 	@echo "Build completed: $(EXEC)"
 
 build/%.o: src/%.c
-	@mkdir -p build
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Compiled: $< -> $@"
+
+directories:
+	@mkdir -p build/main build/gui build/crypto build/utils
 
 clean:
 	rm -rf build/ bin/

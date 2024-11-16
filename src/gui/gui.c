@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 #include "gui.h"
-#include "crypto.h"
+#include "../crypto/crypto.h"
 
 void create_main_window() {
     GtkWidget *window;
