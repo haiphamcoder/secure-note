@@ -11,17 +11,23 @@
 
 ## 📂 Cấu trúc thư mục
 
-```
+```text
 secure-note/
-├── src/               # Mã nguồn chính
-│   ├── main.c         # Điểm bắt đầu của ứng dụng
-│   ├── gui.c          # Các hàm liên quan đến giao diện GTK3
-│   ├── gui.h          # Header file cho gui.c
-│   ├── crypto.c       # Các hàm liên quan đến mã hóa
-│   └── crypto.h       # Header file cho crypto.c
-├── assets/            # Các tài nguyên như icon, hình ảnh
-├── data/              # Thư mục lưu các file ghi chú đã mã hóa
-├── include/           # Các file header chung
+├── src/               
+│   ├── main/          # Mã nguồn chính
+│   │   └── main.c
+│   ├── gui/           # Các file liên quan đến giao diện
+│   │   ├── gui.c
+│   │   └── gui.h
+│   ├── crypto/        # Các file liên quan đến mã hóa
+│   │   ├── crypto.c
+│   │   └── crypto.h
+│   └── utils/         # Các hàm tiện ích chung
+├── assets/            # Các tệp tài nguyên (icon, hình ảnh, v.v.)
+├── data/              # Thư mục lưu trữ các file ghi chú
+├── include/           # Các file header chung (tùy chọn)
+├── build/             # Thư mục chứa các file object (.o)
+├── bin/               # Thư mục chứa file thực thi
 ├── Makefile           # Tệp Makefile để build project
 └── README.md          # Thông tin và hướng dẫn sử dụng project
 ```
