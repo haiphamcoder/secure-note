@@ -1,5 +1,6 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "gui.h"
 
 GtkWidget *main_window;
@@ -130,62 +131,81 @@ void create_main_window()
     gtk_widget_show_all(main_window);
 }
 
-void on_menu_file_new(GtkWidget *widget, gpointer data) {
+void on_menu_file_new(GtkWidget *widget, gpointer data)
+{
     GtkTextBuffer *buffer = gtk_text_view_get_buffer(GTK_TEXT_VIEW(text_view));
     gtk_text_buffer_set_text(buffer, "", -1);
 }
 
-void on_menu_file_open(GtkWidget *widget, gpointer data) {
+void on_menu_file_open(GtkWidget *widget, gpointer data)
+{
     g_print("Open file clicked\n");
 }
 
-void on_menu_file_save(GtkWidget *widget, gpointer data) {
+void on_menu_file_save(GtkWidget *widget, gpointer data)
+{
     g_print("Save file clicked\n");
 }
 
-void on_menu_file_quit(GtkWidget *widget, gpointer data) {
+void on_menu_file_quit(GtkWidget *widget, gpointer data)
+{
     gtk_main_quit();
 }
 
-void on_menu_edit_undo(GtkWidget *widget, gpointer data) {
+void on_menu_edit_undo(GtkWidget *widget, gpointer data)
+{
     g_print("Undo clicked\n");
 }
 
-void on_menu_edit_redo(GtkWidget *widget, gpointer data) {
+void on_menu_edit_redo(GtkWidget *widget, gpointer data)
+{
     g_print("Redo clicked\n");
 }
 
-void on_menu_edit_cut(GtkWidget *widget, gpointer data) {
+void on_menu_edit_cut(GtkWidget *widget, gpointer data)
+{
     g_print("Cut clicked\n");
 }
 
-void on_menu_edit_copy(GtkWidget *widget, gpointer data) {
+void on_menu_edit_copy(GtkWidget *widget, gpointer data)
+{
     g_print("Copy clicked\n");
 }
 
-void on_menu_edit_paste(GtkWidget *widget, gpointer data) {
+void on_menu_edit_paste(GtkWidget *widget, gpointer data)
+{
     g_print("Paste clicked\n");
 }
 
-void on_menu_help_about(GtkWidget *widget, gpointer data) {
+void on_menu_help_about(GtkWidget *widget, gpointer data)
+{
     GtkWidget *about_dialog;
     char *license_text = NULL;
     size_t license_text_len = 0;
     FILE *license_file;
 
     license_file = fopen("LICENSE", "r");
-    if (license_file != NULL) {
+    if (license_file == NULL)
+    {
+        license_file = fopen("/usr/local/share/secure-note/LICENSE", "r");
+    }
+
+    if (license_file != NULL)
+    {
         fseek(license_file, 0, SEEK_END);
         license_text_len = ftell(license_file);
         fseek(license_file, 0, SEEK_SET);
 
         license_text = (char *)malloc(license_text_len + 1);
-        if (license_text) {
+        if (license_text)
+        {
             fread(license_text, 1, license_text_len, license_file);
             license_text[license_text_len] = '\0';
         }
         fclose(license_file);
-    } else {
+    }
+    else
+    {
         license_text = "License file not found";
     }
 
@@ -209,12 +229,13 @@ void on_menu_help_about(GtkWidget *widget, gpointer data) {
 
     gtk_window_set_transient_for(GTK_WINDOW(about_dialog), GTK_WINDOW(main_window));
     gtk_window_set_modal(GTK_WINDOW(about_dialog), TRUE);
-    
+
     gtk_dialog_run(GTK_DIALOG(about_dialog));
 
     gtk_widget_destroy(about_dialog);
 
-    if (license_text != NULL) {
+    if (license_text != NULL)
+    {
         free(license_text);
     }
 }

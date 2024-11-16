@@ -1,0 +1,4 @@
+#!/bin/bash
+
+chmod +x /usr/local/bin/secure-note
+echo "SecureNote has been installed successfully!"

@@ -1,0 +1,8 @@
+Package: secure-note
+Version: 1.0
+Section: utils
+Priority: optional
+Architecture: amd64
+Maintainer: Phạm Ngọc Hải <ngochai285nd@gmail.com>
+Description: SecureNote - Ứng dụng ghi chú bảo mật
+ SecureNote là một ứng dụng ghi chú bảo mật, cho phép bạn tạo và lưu các ghi chú được mã hóa bằng mật khẩu.
