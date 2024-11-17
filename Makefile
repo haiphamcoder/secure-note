@@ -3,7 +3,11 @@ CFLAGS = -Wall -g `pkg-config --cflags gtk+-3.0` -I./src/gui -I./src/crypto
 LDFLAGS = `pkg-config --libs gtk+-3.0` -lcrypto
 
 SRC_MAIN = src/main/main.c
-SRC_GUI = src/gui/gui.c
+SRC_GUI = src/gui/main_window/main_window.c \
+          src/gui/menu/menu_bar.c \
+		  src/gui/tool_bar/tool_bar.c \
+		  src/gui/text_view/text_view.c \
+		  src/gui/status_bar/status_bar.c
 SRC_CRYPTO = src/crypto/crypto.c
 SRC_UTILS = $(wildcard src/utils/*.c)
 SRC = $(SRC_MAIN) $(SRC_GUI) $(SRC_CRYPTO) $(SRC_UTILS)
@@ -13,7 +17,7 @@ EXEC = bin/secure-note
 
 .PHONY: all clean build-deb
 
-all: directories $(EXEC)
+all: $(EXEC)
 
 $(EXEC): $(OBJ)
 	@mkdir -p bin
@@ -34,9 +38,6 @@ build-deb: all
 	@mkdir -p dist/
 	mv debian.deb dist/secure-note-1.0.deb
 	@echo "Package created: secure-note-1.0.deb"
-
-directories:
-	@mkdir -p build/main build/gui build/crypto build/utils
 
 clean:
 	rm -rf build/ bin/ dist/ debian/usr/local/bin/ debian/usr/local/share/secure-note/
