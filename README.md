@@ -87,7 +87,7 @@ Nếu bạn muốn đóng góp cho dự án, hãy:
 
 ## 📜 Giấy phép
 
-Dự án này được phát hành theo giấy phép **MIT License**. Xem thêm trong file [LICENSE](./LICENSE).
+Dự án này được phát hành theo giấy phép **MIT License**. Xem thêm trong file [LICENSE](./docs/LICENSE).
 
 ## 📧 Liên hệ
 
